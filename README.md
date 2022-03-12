@@ -2,6 +2,7 @@
 Dash graphs for viewing head-to-head matchup stats between teams in a ESPN 9CAT league.
 
 You'll need the ID for your ESPN league. This can be retrieved from the 'League Home' URL:
+
 ex: `https://fantasy.espn.com/basketball/league?leagueId=<copy_this_league_id>`
 
 Make sure that your league is public and viewable. This can be done by:
