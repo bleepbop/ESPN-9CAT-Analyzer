@@ -1,0 +1,7 @@
+dash
+dash-bootstrap-components
+espn_api
+pandas
+nba_api
+numpy
+
