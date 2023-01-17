@@ -153,6 +153,18 @@ class LeagueStats:
         combined_df.rename(columns = {'FT_PCT':'FT%'}, inplace = True)
         combined_df.rename(columns = {'FG3M':'3PTM'}, inplace = True)
         return combined_df
+    
+    def convert_weekly_performance_data(self, weekly_data_dict: dict):
+        formatted_dict = {}
+        for cat in NINE_CAT_CATEGORIES:
+            formatted_dict[cat] = {team.team_name: [] for team in self.league.teams}
+            formatted_dict[cat]["week"] = [num for num in range(1, 15)]
+        for id in weekly_data_dict:
+            team_performance_data = weekly_data_dict[id]
+            team_name = team_performance_data['team_name']
+            for cat in NINE_CAT_CATEGORIES:
+                formatted_dict[cat][team_name] = team_performance_data[cat]
+        return formatted_dict
 
     def compute_categories_won(self):
         '''
@@ -160,21 +172,26 @@ class LeagueStats:
         '''
         inner = {week: {} for week in range(1, 24)}
         categories_won_by_week = {str(team.team_id): {"team_name": team.team_name, "cats": inner.copy()} for team in self.league.teams}
-        for week in range(0, 18):
+        category_values_per_week = {str(team.team_id): {"team_name": team.team_name, "week": [week for week in range(0, 18)]} for team in self.league.teams}
+        for week in range(1, 18):
             for matchup in self.league.scoreboard(week):
                 # Prevent Errors for matchups that haven't occurred yet
                 if matchup.home_team_cats and matchup.away_team_cats:
                     categories_won_by_week[str(matchup.home_team.team_id)]["cats"][week] = [entry for entry in matchup.home_team_cats.keys() if matchup.home_team_cats[entry]['result'] == 'WIN']
                     categories_won_by_week[str(matchup.away_team.team_id)]["cats"][week] = [entry for entry in matchup.away_team_cats.keys() if matchup.away_team_cats[entry]['result'] == 'WIN']
-        
+                    for cat in matchup.home_team_cats:
+                        if cat not in category_values_per_week[str(matchup.away_team.team_id)]:
+                            category_values_per_week[str(matchup.away_team.team_id)][cat] = []
+                            category_values_per_week[str(matchup.home_team.team_id)][cat] = []
+                        category_values_per_week[str(matchup.away_team.team_id)][cat].append(matchup.away_team_cats[cat]['score'])
+                        category_values_per_week[str(matchup.home_team.team_id)][cat].append(matchup.home_team_cats[cat]['score'])
         cleaned_output = {}
         best_categories_by_team = []
         for id in categories_won_by_week:
             team_name = categories_won_by_week[id]["team_name"]
             new_dict = {team_name: categories_won_by_week[id]["cats"]}
             cleaned_output.update(new_dict)
-            print(cleaned_output)
-            team_name = categories_won_by_week[id]["team_name"]
+            # team_name = categories_won_by_week[id]["team_name"]
             inner = {category: 0 for category in NINE_CAT_CATEGORIES}
             for week in new_dict[team_name]:
                 for category in new_dict[team_name][week]:
@@ -185,4 +202,4 @@ class LeagueStats:
             json.dump(cleaned_output, fp)
         with open('total_categories_won.json', 'w') as fp:
             json.dump(best_categories_by_team, fp)
-        return pd.DataFrame.from_dict(best_categories_by_team)
+        return pd.DataFrame.from_dict(best_categories_by_team), self.convert_weekly_performance_data(category_values_per_week)
