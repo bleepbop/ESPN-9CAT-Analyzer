@@ -158,7 +158,8 @@ class LeagueStats:
         formatted_dict = {}
         for cat in NINE_CAT_CATEGORIES:
             formatted_dict[cat] = {team.team_name: [] for team in self.league.teams}
-            formatted_dict[cat]["week"] = [num for num in range(1, 15)]
+            weeks_completed = self.league.teams[0].wins + self.league.teams[0].losses
+            formatted_dict[cat]["week"] = [num for num in range(1, weeks_completed)]
         for id in weekly_data_dict:
             team_performance_data = weekly_data_dict[id]
             team_name = team_performance_data['team_name']
