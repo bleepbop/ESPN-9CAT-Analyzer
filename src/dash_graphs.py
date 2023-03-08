@@ -61,8 +61,6 @@ app.layout = dbc.Container(
         ),
         dcc.Tabs(id='tabs', value='Tab1', children=[
             dcc.Tab(label='Points Plots', id='pts_tab', value='PtsTab', children =[
-                html.Hr(),
-                html.Hr(),
                 html.H2('Average Weekly Points per Team'),
                 dbc.Row(
                     [
@@ -97,8 +95,6 @@ app.layout = dbc.Container(
                 ),
             ]),
             dcc.Tab(label='Rebound Plots', id='reb_tab', value='RebTab', children=[
-                html.Hr(),
-                html.Hr(),
                 html.H2('Average Weekly Rebounds per Team'),
                 dbc.Row(
                     [
@@ -133,8 +129,6 @@ app.layout = dbc.Container(
                 ),
             ]),
             dcc.Tab(label='Assist Plots', id='ast_tab', value='AstTab', children =[
-                html.Hr(),
-                html.Hr(),
                 html.H2('Weekly Assist Averages per Team'),
                 dbc.Row(
                     [
@@ -169,8 +163,6 @@ app.layout = dbc.Container(
                 ),
             ]),
             dcc.Tab(label='Steal Plots', id='stl_tab', value='StlTab', children=[
-                html.Hr(),
-                html.Hr(),
                 html.H2('Weekly Steal Averages per Team'),
                 dbc.Row(
                     [
@@ -205,8 +197,6 @@ app.layout = dbc.Container(
                 ),
             ]),
             dcc.Tab(label='Block Plots', id='blk_tab', value='BlkTab', children =[
-                html.Hr(),
-                html.Hr(),
                 html.H2('Weekly Block Averages per Team'),
                 dbc.Row(
                     [
@@ -241,8 +231,6 @@ app.layout = dbc.Container(
                 ),
             ]),
             dcc.Tab(label='Turnover Plots', id='to_tab', value='TOTab', children=[
-                html.Hr(),
-                html.Hr(),
                 html.H2('Average Weekly Turnovers per Team'),
                 dbc.Row(
                     [
@@ -277,8 +265,6 @@ app.layout = dbc.Container(
                 ),
             ]),
             dcc.Tab(label='Field Goal % Plots', id='fg_tab', value='FGTab', children =[
-                html.Hr(),
-                html.Hr(),
                 html.H2('Average Weekly Field Goal Percent per Team'),
                 dbc.Row(
                     [
@@ -313,8 +299,6 @@ app.layout = dbc.Container(
                 ),
             ]),
             dcc.Tab(label='Free Throw % Plots', id='ft_tab', value='FTTab', children=[
-                html.Hr(),
-                html.Hr(),
                 html.H2('Average Weekly Free Throw Percentage per Team'),
                 dbc.Row(
                     [
@@ -349,8 +333,6 @@ app.layout = dbc.Container(
                 ),
             ]),
             dcc.Tab(label='3 Pointers Made Plots', id='3ptm_tab', value='3PTTab', children =[
-                html.Hr(),
-                html.Hr(),
                 html.H2('Average Weekly Made 3 Pointers per Team'),
                 dbc.Row(
                     [
