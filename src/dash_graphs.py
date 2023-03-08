@@ -15,7 +15,7 @@ app = dash.Dash(
 
 app.layout = dbc.Container(
     children=[
-        html.H1(children='NBA Fantasy Basketball 9CAT League Analyzer', style={'textAlign': 'center', 'background-color':'primary'}),
+        html.H1(children='NBA Fantasy Basketball 9CAT League Analyzer', style={'textAlign': 'center', 'background-color': 'primary'}),
         dbc.NavbarSimple(
             brand='Created by bleebop',
             brand_href='https://github.com/bleepbop?tab=repositories',
@@ -25,32 +25,37 @@ app.layout = dbc.Container(
         dbc.Row(
             [
                 dbc.Col(
-                    dbc.Card(
-                        [
-                            dbc.Row(
-                                [
-                                    dbc.Label('Search For Your ESPN League'),
-                                    html.Br(),
-                                    dcc.Input(
-                                        id="input_league_id",
-                                        type="number",
-                                        placeholder="ESPN League ID",
-                                        persistence=True
-                                    ),
-                                    html.Br(),
-                                    dcc.Input(
-                                        id="input_league_year",
-                                        type="number",
-                                        placeholder="Fantasy League Year",
-                                        persistence=True
-                                    )
-                                ]
-                            ),
-                        ],
-                        body=True,
-                        color='primary'
-                    ),
-                    md=4
+                    dbc.Card([
+                        dbc.Label('Search For Your ESPN League'),
+                    ],
+                    body=True,
+                    color='primary'),
+                ),
+                dbc.Col(
+                    dbc.Card([
+                        dbc.Label('Enter your ESPN League ID:  '),
+                        dcc.Input(
+                            id="input_league_id",
+                            type="number",
+                            placeholder="ESPN League ID",
+                            persistence=True
+                        )
+                    ],
+                    body=True,
+                    color='primary'),
+                ),
+                dbc.Col(
+                    dbc.Card([
+                        dbc.Label('Enter your ESPN League Year:  '),
+                        dcc.Input(
+                            id="input_league_year",
+                            type="number",
+                            placeholder="Fantasy League Year",
+                            persistence=True
+                        )
+                    ],
+                    body=True,
+                    color='primary'),
                 )
             ]
         ),
