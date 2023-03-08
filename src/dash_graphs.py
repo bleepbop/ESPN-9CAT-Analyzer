@@ -9,26 +9,6 @@ import plotly.graph_objects as go
 from data_generator import LeagueStats, NINE_CAT_CATEGORIES
 
 
-my_league = LeagueStats(league_id='', league_year=2023)
-stats = my_league.rate_teams()
-total_cat_wins_df, weekly_performance_df = my_league.compute_categories_won()
-stats.set_index('TEAM_NAME')
-
-fig_dict = {CAT: px.bar(total_cat_wins_df, x="TEAM", y=CAT, color="TEAM") for CAT in NINE_CAT_CATEGORIES}
-weekly_avgs_dict = {CAT: px.bar(stats, x="TEAM_NAME", y=CAT, color="TEAM_NAME") for CAT in NINE_CAT_CATEGORIES}
-performance_per_week_dict = {}
-
-for CAT in NINE_CAT_CATEGORIES:
-    weeks = weekly_performance_df[CAT]['week']
-    fig = go.Figure()
-    for team in my_league.league.teams:
-        team_name = team.team_name
-        cat_stats = weekly_performance_df[CAT][team_name]
-        fig.add_trace(go.Line(name=team_name, x=weeks, y=cat_stats))
-    fig.update_xaxes(title_text="Week")
-    fig.update_yaxes(title_text=CAT)
-    performance_per_week_dict[CAT] = fig
-
 app = dash.Dash(
     external_stylesheets=[dbc.themes.LUMEN]
 )
@@ -83,7 +63,7 @@ app.layout = dbc.Container(
                     [
                         dbc.Col(
                             [
-                                dcc.Graph(id="avg_pts", figure=weekly_avgs_dict['PTS'])
+                                dcc.Graph(id="avg_pts")
                             ]
                         )
                     ]
@@ -94,7 +74,7 @@ app.layout = dbc.Container(
                     [
                         dbc.Col(
                             [
-                                dcc.Graph(id="graph_pts", figure=fig_dict['PTS'])
+                                dcc.Graph(id="graph_pts")
                             ]
                         )
                     ]
@@ -105,7 +85,7 @@ app.layout = dbc.Container(
                     [
                         dbc.Col(
                             [
-                                dcc.Graph(id="graph_pts_weekly", figure=performance_per_week_dict['PTS'])
+                                dcc.Graph(id="graph_pts_weekly")
                             ]
                         )
                     ]
@@ -119,7 +99,7 @@ app.layout = dbc.Container(
                     [
                         dbc.Col(
                             [
-                                dcc.Graph(id="avg_REB", figure=weekly_avgs_dict['REB'])
+                                dcc.Graph(id="avg_REB")
                             ]
                         )
                     ]
@@ -130,7 +110,7 @@ app.layout = dbc.Container(
                     [
                         dbc.Col(
                             [
-                                dcc.Graph(id="graph_REB", figure=fig_dict['REB'])
+                                dcc.Graph(id="graph_REB")
                             ]
                         )
                     ]
@@ -141,7 +121,7 @@ app.layout = dbc.Container(
                     [
                         dbc.Col(
                             [
-                                dcc.Graph(id="graph_REB_weekly", figure=performance_per_week_dict['REB'])
+                                dcc.Graph(id="graph_REB_weekly")
                             ]
                         )
                     ]
@@ -155,7 +135,7 @@ app.layout = dbc.Container(
                     [
                         dbc.Col(
                             [
-                                dcc.Graph(id="avg_AST", figure=weekly_avgs_dict['AST'])
+                                dcc.Graph(id="avg_AST")
                             ]
                         )
                     ]
@@ -166,7 +146,7 @@ app.layout = dbc.Container(
                     [
                         dbc.Col(
                             [
-                                dcc.Graph(id="graph_AST", figure=fig_dict['AST'])
+                                dcc.Graph(id="graph_AST")
                             ]
                         )
                     ]
@@ -177,7 +157,7 @@ app.layout = dbc.Container(
                     [
                         dbc.Col(
                             [
-                                dcc.Graph(id="graph_AST_weekly", figure=performance_per_week_dict['AST'])
+                                dcc.Graph(id="graph_AST_weekly")
                             ]
                         )
                     ]
@@ -191,7 +171,7 @@ app.layout = dbc.Container(
                     [
                         dbc.Col(
                             [
-                                dcc.Graph(id="avg_STL", figure=weekly_avgs_dict['STL'])
+                                dcc.Graph(id="avg_STL")
                             ]
                         )
                     ]
@@ -202,7 +182,7 @@ app.layout = dbc.Container(
                     [
                         dbc.Col(
                             [
-                                dcc.Graph(id="graph_STL", figure=fig_dict['STL'])
+                                dcc.Graph(id="graph_STL")
                             ]
                         )
                     ]
@@ -213,7 +193,7 @@ app.layout = dbc.Container(
                     [
                         dbc.Col(
                             [
-                                dcc.Graph(id="graph_STL_weekly", figure=performance_per_week_dict['STL'])
+                                dcc.Graph(id="graph_STL_weekly")
                             ]
                         )
                     ]
@@ -227,7 +207,7 @@ app.layout = dbc.Container(
                     [
                         dbc.Col(
                             [
-                                dcc.Graph(id="avg_BLK", figure=weekly_avgs_dict['BLK'])
+                                dcc.Graph(id="avg_BLK")
                             ]
                         )
                     ]
@@ -238,7 +218,7 @@ app.layout = dbc.Container(
                     [
                         dbc.Col(
                             [
-                                dcc.Graph(id="graph_BLK", figure=fig_dict['BLK'])
+                                dcc.Graph(id="graph_BLK")
                             ]
                         )
                     ]
@@ -249,7 +229,7 @@ app.layout = dbc.Container(
                     [
                         dbc.Col(
                             [
-                                dcc.Graph(id="graph_BLK_weekly", figure=performance_per_week_dict['BLK'])
+                                dcc.Graph(id="graph_BLK_weekly")
                             ]
                         )
                     ]
@@ -263,7 +243,7 @@ app.layout = dbc.Container(
                     [
                         dbc.Col(
                             [
-                                dcc.Graph(id="avg_TO", figure=weekly_avgs_dict['TO'])
+                                dcc.Graph(id="avg_TO")
                             ]
                         )
                     ]
@@ -274,7 +254,7 @@ app.layout = dbc.Container(
                     [
                         dbc.Col(
                             [
-                                dcc.Graph(id="graph_TO", figure=fig_dict['TO'])
+                                dcc.Graph(id="graph_TO")
                             ]
                         )
                     ]
@@ -285,7 +265,7 @@ app.layout = dbc.Container(
                     [
                         dbc.Col(
                             [
-                                dcc.Graph(id="graph_TO_weekly", figure=performance_per_week_dict['TO'])
+                                dcc.Graph(id="graph_TO_weekly")
                             ]
                         )
                     ]
@@ -299,7 +279,7 @@ app.layout = dbc.Container(
                     [
                         dbc.Col(
                             [
-                                dcc.Graph(id="avg_FG", figure=weekly_avgs_dict['FG%'])
+                                dcc.Graph(id="avg_FG")
                             ]
                         )
                     ]
@@ -310,7 +290,7 @@ app.layout = dbc.Container(
                     [
                         dbc.Col(
                             [
-                                dcc.Graph(id="graph_FG", figure=fig_dict['FG%'])
+                                dcc.Graph(id="graph_FG")
                             ]
                         )
                     ]
@@ -321,7 +301,7 @@ app.layout = dbc.Container(
                     [
                         dbc.Col(
                             [
-                                dcc.Graph(id="graph_FG_weekly", figure=performance_per_week_dict['FG%'])
+                                dcc.Graph(id="graph_FG_weekly")
                             ]
                         )
                     ]
@@ -335,7 +315,7 @@ app.layout = dbc.Container(
                     [
                         dbc.Col(
                             [
-                                dcc.Graph(id="avg_FT", figure=weekly_avgs_dict['FT%'])
+                                dcc.Graph(id="avg_FT")
                             ]
                         )
                     ]
@@ -346,7 +326,7 @@ app.layout = dbc.Container(
                     [
                         dbc.Col(
                             [
-                                dcc.Graph(id="graph_FT", figure=fig_dict['FT%'])
+                                dcc.Graph(id="graph_FT")
                             ]
                         )
                     ]
@@ -357,7 +337,7 @@ app.layout = dbc.Container(
                     [
                         dbc.Col(
                             [
-                                dcc.Graph(id="graph_FT_weekly", figure=performance_per_week_dict['FT%'])
+                                dcc.Graph(id="graph_FT_weekly")
                             ]
                         )
                     ]
@@ -371,7 +351,7 @@ app.layout = dbc.Container(
                     [
                         dbc.Col(
                             [
-                                dcc.Graph(id="avg_3PTM", figure=weekly_avgs_dict['3PTM'])
+                                dcc.Graph(id="avg_3PTM")
                             ]
                         )
                     ]
@@ -382,7 +362,7 @@ app.layout = dbc.Container(
                     [
                         dbc.Col(
                             [
-                                dcc.Graph(id="graph_3PTM", figure=fig_dict['3PTM'])
+                                dcc.Graph(id="graph_3PTM")
                             ]
                         )
                     ]
@@ -393,7 +373,7 @@ app.layout = dbc.Container(
                     [
                         dbc.Col(
                             [
-                                dcc.Graph(id="graph_3PTM_weekly", figure=performance_per_week_dict['3PTM'])
+                                dcc.Graph(id="graph_3PTM_weekly")
                             ]
                         )
                     ]
@@ -404,29 +384,86 @@ app.layout = dbc.Container(
     fluid=True
 )
 
+@app.callback(
+    Output(component_id='avg_pts', component_property='figure'),
+    Output(component_id='avg_REB', component_property='figure'),
+    Output(component_id='avg_AST', component_property='figure'),
+    Output(component_id='avg_STL', component_property='figure'),
+    Output(component_id='avg_BLK', component_property='figure'),
+    Output(component_id='avg_TO', component_property='figure'),
+    Output(component_id='avg_FG', component_property='figure'),
+    Output(component_id='avg_FT', component_property='figure'),
+    Output(component_id='avg_3PTM', component_property='figure'),
+    Input(component_id='input_league_id', component_property='value'),
+    Input(component_id='input_league_year', component_property='value'),
+)
+def init_weekly_avg_plots(league_id, league_year):
+    if league_id == None or league_year == None:
+        return
+    print('init weekly avg')
+    my_league = LeagueStats(league_id='878418191', league_year=2023)
+    stats = my_league.rate_teams()
+    total_cat_wins_df, weekly_performance_df = my_league.compute_categories_won()
+    stats.set_index('TEAM_NAME')
+
+    weekly_avgs_dict = {CAT: px.bar(stats, x="TEAM_NAME", y=CAT, color="TEAM_NAME") for CAT in NINE_CAT_CATEGORIES}
+    return weekly_avgs_dict['PTS'], weekly_avgs_dict['REB'], weekly_avgs_dict['AST'], weekly_avgs_dict['STL'], weekly_avgs_dict['BLK'], weekly_avgs_dict['TO'], weekly_avgs_dict['FG%'], weekly_avgs_dict['FT%'], weekly_avgs_dict['3PTM']
+
+@app.callback(
+    Output(component_id='graph_pts', component_property='figure'),
+    Output(component_id='graph_REB', component_property='figure'),
+    Output(component_id='graph_AST', component_property='figure'),
+    Output(component_id='graph_STL', component_property='figure'),
+    Output(component_id='graph_BLK', component_property='figure'),
+    Output(component_id='graph_TO', component_property='figure'),
+    Output(component_id='graph_FG', component_property='figure'),
+    Output(component_id='graph_FT', component_property='figure'),
+    Output(component_id='graph_3PTM', component_property='figure'),
+    Input(component_id='input_league_id', component_property='value'),
+    Input(component_id='input_league_year', component_property='value'),
+)
+def init_weeks_won_plots(league_id, league_year):
+    if league_id == None or league_year == None:
+        return
+    print('init weeks won')
+    my_league = LeagueStats(league_id='878418191', league_year=2023)
+    total_cat_wins_df, weekly_performance_df = my_league.compute_categories_won()
+
+    fig_dict = {CAT: px.bar(total_cat_wins_df, x="TEAM", y=CAT, color="TEAM") for CAT in NINE_CAT_CATEGORIES}
+    return fig_dict['PTS'], fig_dict['REB'], fig_dict['AST'], fig_dict['STL'], fig_dict['BLK'], fig_dict['TO'], fig_dict['FG%'], fig_dict['FT%'], fig_dict['3PTM']
+
+@app.callback(
+    Output(component_id='graph_pts_weekly', component_property='figure'),
+    Output(component_id='graph_REB_weekly', component_property='figure'),
+    Output(component_id='graph_AST_weekly', component_property='figure'),
+    Output(component_id='graph_STL_weekly', component_property='figure'),
+    Output(component_id='graph_BLK_weekly', component_property='figure'),
+    Output(component_id='graph_TO_weekly', component_property='figure'),
+    Output(component_id='graph_FG_weekly', component_property='figure'),
+    Output(component_id='graph_FT_weekly', component_property='figure'),
+    Output(component_id='graph_3PTM_weekly', component_property='figure'),
+    Input(component_id='input_league_id', component_property='value'),
+    Input(component_id='input_league_year', component_property='value'),
+)
+def init_season_performance_plots(league_id, league_year):
+    if league_id == None or league_year == None:
+        return
+    print('init_season_performance')
+    my_league = LeagueStats(league_id='878418191', league_year=2023)
+    total_cat_wins_df, weekly_performance_df = my_league.compute_categories_won()
+
+    performance_per_week_dict = {}
+
+    for CAT in NINE_CAT_CATEGORIES:
+        weeks = weekly_performance_df[CAT]['week']
+        fig = go.Figure()
+        for team in my_league.league.teams:
+            team_name = team.team_name
+            cat_stats = weekly_performance_df[CAT][team_name]
+            fig.add_trace(go.Line(name=team_name, x=weeks, y=cat_stats))
+        fig.update_xaxes(title_text="Week")
+        fig.update_yaxes(title_text=CAT)
+        performance_per_week_dict[CAT] = fig
+    return performance_per_week_dict['PTS'], performance_per_week_dict['REB'], performance_per_week_dict['AST'], performance_per_week_dict['STL'], performance_per_week_dict['BLK'], performance_per_week_dict['TO'], performance_per_week_dict['FG%'], performance_per_week_dict['FT%'], performance_per_week_dict['3PTM']
 
 app.run_server(host='0.0.0.0', port=8000, debug=True)
-
-
-@app.callback(
-    Output('datatable-interactivity', 'style_data_conditional'),
-    Input('datatable-interactivity', 'selected_columns')
-)
-def update_styles(selected_columns):
-    return [{
-        'if': { 'column_id': i },
-        'background_color': '#D2F3FF'
-    } for i in selected_columns]
-
-@app.callback(
-    Output("graph", "figure"), 
-    [Input("categories", "value")])
-def filter_heatmap(cols):
-    data = stats.copy()
-
-    fig = px.imshow(
-        data=data,
-        x=['PTS'],
-        y=['TEAM_NAME']
-    )
-    return fig
