@@ -400,7 +400,6 @@ app.layout = dbc.Container(
 def init_weekly_avg_plots(league_id, league_year):
     if league_id == None or league_year == None:
         return
-    print('init weekly avg')
     my_league = LeagueStats(league_id='878418191', league_year=2023)
     stats = my_league.rate_teams()
     total_cat_wins_df, weekly_performance_df = my_league.compute_categories_won()
@@ -425,7 +424,6 @@ def init_weekly_avg_plots(league_id, league_year):
 def init_weeks_won_plots(league_id, league_year):
     if league_id == None or league_year == None:
         return
-    print('init weeks won')
     my_league = LeagueStats(league_id='878418191', league_year=2023)
     total_cat_wins_df, weekly_performance_df = my_league.compute_categories_won()
 
@@ -448,7 +446,6 @@ def init_weeks_won_plots(league_id, league_year):
 def init_season_performance_plots(league_id, league_year):
     if league_id == None or league_year == None:
         return
-    print('init_season_performance')
     my_league = LeagueStats(league_id='878418191', league_year=2023)
     total_cat_wins_df, weekly_performance_df = my_league.compute_categories_won()
 
