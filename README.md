@@ -10,10 +10,10 @@ Make sure that your league is public and viewable. This can be done by:
 * Clicking `Basic Settings`
 * Setting `Make League Viewable to Public` to true
 
-Then, enter the league ID as the `league_id` parameter in `LeagueStats.__init__` in `data_generator.py`.
-
-Finally, run the program
+Run the program
 
 `python3 dash_graphs.py`
 
 and navigate to `http://localhost:8000` in the browser.
+
+You can enter your League ID and League Year to populate plots for your league's season. Charts will take a little bit of time to load.
