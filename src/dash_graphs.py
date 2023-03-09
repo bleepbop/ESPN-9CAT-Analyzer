@@ -21,32 +21,30 @@ app.layout = dbc.Container(
             brand_href='https://github.com/bleepbop?tab=repositories',
             color="primary",
             dark=True,
+            className='mx-1'
         ),
         dbc.Row(
             [
                 dbc.Col(
-                    dbc.Card([
-                        dbc.Label('Search For Your ESPN League'),
+                    html.Div([
+                        dbc.Label('Search For Your ESPN League', className='p-3'),
                     ],
-                    body=True,
-                    color='primary'),
+                    )
                 ),
                 dbc.Col(
-                    dbc.Card([
-                        dbc.Label('Enter your ESPN League ID:  '),
+                    html.Div([
+                        dbc.Label('Enter your ESPN League ID:  ', className='p-3'),
                         dcc.Input(
                             id="input_league_id",
                             type="number",
                             placeholder="ESPN League ID",
                             persistence=True
                         )
-                    ],
-                    body=True,
-                    color='primary'),
+                    ])
                 ),
                 dbc.Col(
-                    dbc.Card([
-                        dbc.Label('Enter your ESPN League Year:  '),
+                    html.Div([
+                        dbc.Label('Enter your ESPN League Year:  ', className='p-3'),
                         dcc.Input(
                             id="input_league_year",
                             type="number",
@@ -54,10 +52,10 @@ app.layout = dbc.Container(
                             persistence=True
                         )
                     ],
-                    body=True,
-                    color='primary'),
+                    ),
                 )
-            ]
+            ],
+            className='bg-primary mx-1'
         ),
         dcc.Tabs(id='tabs', value='Tab1', children=[
             dcc.Tab(label='Points Plots', id='pts_tab', value='PtsTab', children =[
