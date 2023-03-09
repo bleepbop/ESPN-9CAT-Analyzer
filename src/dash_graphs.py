@@ -499,7 +499,7 @@ def init_season_performance_plots(league_id, league_year):
         for team in my_league.league.teams:
             team_name = team.team_name
             cat_stats = weekly_performance_df[CAT][team_name]
-            fig.add_trace(go.Line(name=team_name, x=weeks, y=cat_stats))
+            fig.add_trace(go.Scatter(name=team_name, x=weeks, y=cat_stats))
         fig.update_xaxes(title_text="Week")
         fig.update_yaxes(title_text=CAT)
         performance_per_week_dict[CAT] = fig
