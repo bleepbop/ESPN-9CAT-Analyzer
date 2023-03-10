@@ -10,10 +10,23 @@ Make sure that your league is public and viewable. This can be done by:
 * Clicking `Basic Settings`
 * Setting `Make League Viewable to Public` to true
 
-Then, enter the league ID as the `league_id` parameter in `LeagueStats.__init__` in `data_generator.py`.
+The program will take the input year and input league ID on the main page.
 
-Finally, run the program
+## Running the program
+From the main directory (`9CAT_RANKINGS`):
+*Note: It is recommended to use a virtual environment such as venv for this*
 
-`python3 dash_graphs.py`
+1. `pip install -r requirements.txt`
+
+2. `python3 src/dash_graphs.py`
 
 and navigate to `http://localhost:8000` in the browser.
+
+### Running the App with Docker
+Build the image: 
+
+`docker build -t nbaplots .`
+
+Run the container on port 8000:
+
+`docker run -p 8000:8000 -d nbaplots`
