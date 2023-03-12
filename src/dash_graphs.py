@@ -44,8 +44,7 @@ app.layout = dbc.Container(
                         dcc.Input(
                             id="input_league_id",
                             type="number",
-                            placeholder="ESPN League ID",
-                            persistence=True
+                            placeholder="ESPN League ID"
                         )
                     ])
                 ),
@@ -58,8 +57,7 @@ app.layout = dbc.Container(
                         dcc.Input(
                             id="input_league_year",
                             type="number",
-                            placeholder="Fantasy League Year",
-                            persistence=True
+                            placeholder="Fantasy League Year"
                         )
                     ]),
                 )
