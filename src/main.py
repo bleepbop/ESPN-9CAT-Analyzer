@@ -16,7 +16,7 @@ from layout_files.field_goal_percent_plots import FIELD_GOAL_PERCENT_LAYOUT
 from layout_files.free_throw_percent_plots import FREE_THROW_PERCENT_LAYOUT
 from layout_files.rebounds_plots import REBOUNDS_LAYOUT
 from layout_files.steals_plots import STEALS_LAYOUT
-from layout_files.three_point_field_goal_plots import THREE_POINT_FIELD_GOALS_LAYOUT
+from layout_files.three_point_field_goal_plots import THREE_POINT_FIELD_GOALS_LAYOUT  # noqa: E501
 from layout_files.turnovers_plots import TURNOVERS_LAYOUT
 
 
