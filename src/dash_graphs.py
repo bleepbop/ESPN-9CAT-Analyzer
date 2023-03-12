@@ -8,6 +8,16 @@ import plotly.graph_objects as go
 
 from data_generator import LeagueStats, NINE_CAT_CATEGORIES
 
+from points_plots import POINTS_LAYOUT
+from assist_plots import ASSISTS_LAYOUT
+from blocks_plots import BLOCKS_LAYOUT
+from field_goal_percent_plots import FIELD_GOAL_PERCENT_LAYOUT
+from free_throw_percent_plots import FREE_THROW_PERCENT_LAYOUT
+from rebounds_plots import REBOUNDS_LAYOUT
+from steals_plots import STEALS_LAYOUT
+from three_point_field_goal_plots import THREE_POINT_FIELD_GOALS_LAYOUT
+from turnovers_plots import TURNOVERS_LAYOUT
+
 
 app = dash.Dash(
     external_stylesheets=[dbc.themes.LUMEN]
@@ -69,460 +79,55 @@ app.layout = dbc.Container(
                 label='Points Plots',
                 id='pts_tab',
                 value='PtsTab',
-                children=[
-                    html.H2('Average Weekly Points per Team'),
-                    dbc.Row(
-                        [
-                            dbc.Col(
-                                [
-                                    dcc.Loading(
-                                        id="loading-avg-pts",
-                                        children=[dcc.Graph(id="avg_pts")],
-                                        type="graph",
-                                    )
-                                ]
-                            )
-                        ]
-                    ),
-                    html.Hr(),
-                    html.H2('# Of Weeks Each Team Has Won Points Category'),
-                    dbc.Row(
-                        [
-                            dbc.Col(
-                                [
-                                    dcc.Loading(
-                                        id="loading-graph-pts",
-                                        children=[dcc.Graph(id="graph_pts")],
-                                        type="graph",
-                                    )
-                                ]
-                            )
-                        ]
-                    ),
-                    html.Hr(),
-                    html.H2('Points Per Week'),
-                    dbc.Row(
-                        [
-                            dbc.Col(
-                                [
-                                    dcc.Loading(
-                                        id="loading-graph-pts-weekly",
-                                        children=[dcc.Graph(id="graph_pts_weekly")],
-                                        type="graph",
-                                    )
-                                ]
-                            )
-                        ]
-                    ),
-                ]
+                children=POINTS_LAYOUT
             ),
             dcc.Tab(
                 label='Rebound Plots',
                 id='reb_tab',
                 value='RebTab',
-                children=[
-                    html.H2('Average Weekly Rebounds per Team'),
-                    dbc.Row(
-                        [
-                            dbc.Col(
-                                [
-                                    dcc.Loading(
-                                        id="loading-avg-REB",
-                                        children=[dcc.Graph(id="avg_REB")],
-                                        type="graph",
-                                    )
-                                ]
-                            )
-                        ]
-                    ),
-                    html.Hr(),
-                    html.H2('# Of Weeks Each Team Has Won Rebounds Category'),
-                    dbc.Row(
-                        [
-                            dbc.Col(
-                                [
-                                    dcc.Loading(
-                                        id="loading-graph-REB",
-                                        children=[dcc.Graph(id="graph_REB")],
-                                        type="graph",
-                                    )
-                                ]
-                            )
-                        ]
-                    ),
-                    html.Hr(),
-                    html.H2('Rebounds Per Week'),
-                    dbc.Row(
-                        [
-                            dbc.Col(
-                                [
-                                    dcc.Loading(
-                                        id="loading-graph-REB-weekly",
-                                        children=[dcc.Graph(id="graph_REB_weekly")],
-                                        type="graph",
-                                    )
-                                ]
-                            )
-                        ]
-                    )
-                ]
+                children=REBOUNDS_LAYOUT
             ),
             dcc.Tab(
                 label='Assist Plots',
                 id='ast_tab',
                 value='AstTab',
-                children=[
-                    html.H2('Weekly Assist Averages per Team'),
-                    dbc.Row(
-                        [
-                            dbc.Col(
-                                [
-                                    dcc.Loading(
-                                        id="loading-avg-AST",
-                                        children=[dcc.Graph(id="avg_AST")],
-                                        type="graph",
-                                    )
-                                ]
-                            )
-                        ]
-                    ),
-                    html.Hr(),
-                    html.H2('# Of Weeks Each Team Has Won Assists Category'),
-                    dbc.Row(
-                        [
-                            dbc.Col(
-                                [
-                                    dcc.Loading(
-                                        id="loading-graph-AST",
-                                        children=[dcc.Graph(id="graph_AST")],
-                                        type="graph",
-                                    )
-                                ]
-                            )
-                        ]
-                    ),
-                    html.Hr(),
-                    html.H2('Assists Per Week'),
-                    dbc.Row(
-                        [
-                            dbc.Col(
-                                [
-                                    dcc.Loading(
-                                        id="loading-graph-AST-weekly",
-                                        children=[dcc.Graph(id="graph_AST_weekly")],
-                                        type="graph",
-                                    )
-                                ]
-                            )
-                        ]
-                    )
-                ]
+                children=ASSISTS_LAYOUT
             ),
             dcc.Tab(
                 label='Steal Plots',
                 id='stl_tab',
                 value='StlTab',
-                children=[
-                    html.H2('Weekly Steal Averages per Team'),
-                    dbc.Row(
-                        [
-                            dbc.Col(
-                                [
-                                    dcc.Loading(
-                                        id="loading-avg-STL",
-                                        children=[dcc.Graph(id="avg_STL")],
-                                        type="graph",
-                                    )
-                                ]
-                            )
-                        ]
-                    ),
-                    html.Hr(),
-                    html.H2('# Of Weeks Each Team Has Won Steals Category'),
-                    dbc.Row(
-                        [
-                            dbc.Col(
-                                [
-                                    dcc.Loading(
-                                        id="loading-graph-STL",
-                                        children=[dcc.Graph(id="graph_STL")],
-                                        type="graph",
-                                    )
-                                ]
-                            )
-                        ]
-                    ),
-                    html.Hr(),
-                    html.H2('Steals Per Week'),
-                    dbc.Row(
-                        [
-                            dbc.Col(
-                                [
-                                    dcc.Loading(
-                                        id="loading-graph-STL-weekly",
-                                        children=[dcc.Graph(id="graph_STL_weekly")],
-                                        type="graph",
-                                    )
-                                ]
-                            )
-                        ]
-                    )
-                ]
+                children=STEALS_LAYOUT
             ),
             dcc.Tab(
                 label='Block Plots',
                 id='blk_tab',
                 value='BlkTab',
-                children=[
-                    html.H2('Weekly Block Averages per Team'),
-                    dbc.Row(
-                        [
-                            dbc.Col(
-                                [
-                                    dcc.Loading(
-                                        id="loading-avg-BLK",
-                                        children=[dcc.Graph(id="avg_BLK")],
-                                        type="graph",
-                                    )
-                                ]
-                            )
-                        ]
-                    ),
-                    html.Hr(),
-                    html.H2('# Of Weeks Each Team Has Won Blocks Category'),
-                    dbc.Row(
-                        [
-                            dbc.Col(
-                                [
-                                    dcc.Loading(
-                                        id="loading-graph-BLK",
-                                        children=[dcc.Graph(id="graph_BLK")],
-                                        type="graph",
-                                    )
-                                ]
-                            )
-                        ]
-                    ),
-                    html.Hr(),
-                    html.H2('Blocks Per Week'),
-                    dbc.Row(
-                        [
-                            dbc.Col(
-                                [
-                                    dcc.Loading(
-                                        id="loading-graph-BLK-weekly",
-                                        children=[dcc.Graph(id="graph_BLK_weekly")],
-                                        type="graph",
-                                    )
-                                ]
-                            )
-                        ]
-                    )
-                ]
+                children=BLOCKS_LAYOUT
             ),
             dcc.Tab(
                 label='Turnover Plots',
                 id='to_tab',
                 value='TOTab',
-                children=[
-                    html.H2('Average Weekly Turnovers per Team'),
-                    dbc.Row(
-                        [
-                            dbc.Col(
-                                [
-                                    dcc.Loading(
-                                        id="loading-avg-TO",
-                                        children=[dcc.Graph(id="avg_TO")],
-                                        type="graph",
-                                    )
-                                ]
-                            )
-                        ]
-                    ),
-                    html.Hr(),
-                    html.H2('# Of Weeks Each Team Has Won Turnovers Category'),
-                    dbc.Row(
-                        [
-                            dbc.Col(
-                                [
-                                    dcc.Loading(
-                                        id="loading-graph-TO",
-                                        children=[dcc.Graph(id="graph_TO")],
-                                        type="graph",
-                                    )
-                                ]
-                            )
-                        ]
-                    ),
-                    html.Hr(),
-                    html.H2('Turnovers Per Week'),
-                    dbc.Row(
-                        [
-                            dbc.Col(
-                                [
-                                    dcc.Loading(
-                                        id="loading-graph-TO-weekly",
-                                        children=[dcc.Graph(id="graph_TO_weekly")],
-                                        type="graph",
-                                    )
-                                ]
-                            )
-                        ]
-                    )
-                ]
+                children=TURNOVERS_LAYOUT
             ),
             dcc.Tab(
                 label='Field Goal % Plots',
                 id='fg_tab',
                 value='FGTab',
-                children=[
-                    html.H2('Average Weekly Field Goal Percent per Team'),
-                    dbc.Row(
-                        [
-                            dbc.Col(
-                                [
-                                    dcc.Loading(
-                                        id="loading-avg-FG",
-                                        children=[dcc.Graph(id="avg_FG")],
-                                        type="graph",
-                                    )
-                                ]
-                            )
-                        ]
-                    ),
-                    html.Hr(),
-                    html.H2('# Of Weeks Each Team Has Won Field Goal Percentage Category'),  # noqa: E501
-                    dbc.Row(
-                        [
-                            dbc.Col(
-                                [
-                                    dcc.Loading(
-                                        id="loading-graph-FG",
-                                        children=[dcc.Graph(id="graph_FG")],
-                                        type="graph",
-                                    )
-                                ]
-                            )
-                        ]
-                    ),
-                    html.Hr(),
-                    html.H2('Field Goal Percentage Per Week'),
-                    dbc.Row(
-                        [
-                            dbc.Col(
-                                [
-                                    dcc.Loading(
-                                        id="loading-graph-FG-weekly",
-                                        children=[dcc.Graph(id="graph_FG_weekly")],
-                                        type="graph",
-                                    )
-                                ]
-                            )
-                        ]
-                    )
-                ]
+                children=FIELD_GOAL_PERCENT_LAYOUT
             ),
             dcc.Tab(
                 label='Free Throw % Plots',
                 id='ft_tab',
                 value='FTTab',
-                children=[
-                    html.H2('Average Weekly Free Throw Percentage per Team'),
-                    dbc.Row(
-                        [
-                            dbc.Col(
-                                [
-                                    dcc.Loading(
-                                        id="loading-avg-FT",
-                                        children=[dcc.Graph(id="avg_FT")],
-                                        type="graph",
-                                    )
-                                ]
-                            )
-                        ]
-                    ),
-                    html.Hr(),
-                    html.H2('# Of Weeks Each Team Has Won Free Throw Percentage Category'),  # noqa: E501
-                    dbc.Row(
-                        [
-                            dbc.Col(
-                                [
-                                    dcc.Loading(
-                                        id="loading-graph-FT",
-                                        children=[dcc.Graph(id="graph_FT")],
-                                        type="graph",
-                                    )
-                                ]
-                            )
-                        ]
-                    ),
-                    html.Hr(),
-                    html.H2('Free Throw Percentage Per Week'),
-                    dbc.Row(
-                        [
-                            dbc.Col(
-                                [
-                                    dcc.Loading(
-                                        id="loading-graph-FT-weekly",
-                                        children=[dcc.Graph(id="graph_FT_weekly")],
-                                        type="graph",
-                                    )
-                                ]
-                            )
-                        ]
-                    )
-                ]
+                children=FREE_THROW_PERCENT_LAYOUT
             ),
             dcc.Tab(
                 label='3 Pointers Made Plots',
                 id='3ptm_tab',
                 value='3PTTab',
-                children=[
-                    html.H2('Average Weekly Made 3 Pointers per Team'),
-                    dbc.Row(
-                        [
-                            dbc.Col(
-                                [
-                                    dcc.Loading(
-                                        id="loading-avg-3PTM",
-                                        children=[dcc.Graph(id="avg_3PTM")],
-                                        type="graph",
-                                    )
-                                ]
-                            )
-                        ]
-                    ),
-                    html.Hr(),
-                    html.H2('# Of Weeks Each Team Has Won Made 3 Pointers Category'),  # noqa: E501
-                    dbc.Row(
-                        [
-                            dbc.Col(
-                                [
-                                    dcc.Loading(
-                                        id="loading-graph-3PTM",
-                                        children=[dcc.Graph(id="graph_3PTM")],
-                                        type="graph",
-                                    )
-                                ]
-                            )
-                        ]
-                    ),
-                    html.Hr(),
-                    html.H2('Made 3 Pointers Per Week'),
-                    dbc.Row(
-                        [
-                            dbc.Col(
-                                [
-                                    dcc.Loading(
-                                        id="loading-graph-3PTM-weekly",
-                                        children=[dcc.Graph(id="graph_3PTM_weekly")],
-                                        type="graph",
-                                    )
-                                ]
-                            )
-                        ]
-                    )
-                ]
+                children=THREE_POINT_FIELD_GOALS_LAYOUT
             )
         ]),
     ],
