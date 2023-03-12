@@ -3,20 +3,21 @@ from dash import dcc, html
 from dash.dependencies import Input, Output
 
 import dash_bootstrap_components as dbc
+
 import plotly.express as px
 import plotly.graph_objects as go
 
 from data_generator import LeagueStats, NINE_CAT_CATEGORIES
 
-from points_plots import POINTS_LAYOUT
-from assist_plots import ASSISTS_LAYOUT
-from blocks_plots import BLOCKS_LAYOUT
-from field_goal_percent_plots import FIELD_GOAL_PERCENT_LAYOUT
-from free_throw_percent_plots import FREE_THROW_PERCENT_LAYOUT
-from rebounds_plots import REBOUNDS_LAYOUT
-from steals_plots import STEALS_LAYOUT
-from three_point_field_goal_plots import THREE_POINT_FIELD_GOALS_LAYOUT
-from turnovers_plots import TURNOVERS_LAYOUT
+from layout_files.points_plots import POINTS_LAYOUT
+from layout_files.assist_plots import ASSISTS_LAYOUT
+from layout_files.blocks_plots import BLOCKS_LAYOUT
+from layout_files.field_goal_percent_plots import FIELD_GOAL_PERCENT_LAYOUT
+from layout_files.free_throw_percent_plots import FREE_THROW_PERCENT_LAYOUT
+from layout_files.rebounds_plots import REBOUNDS_LAYOUT
+from layout_files.steals_plots import STEALS_LAYOUT
+from layout_files.three_point_field_goal_plots import THREE_POINT_FIELD_GOALS_LAYOUT
+from layout_files.turnovers_plots import TURNOVERS_LAYOUT
 
 
 app = dash.Dash(
