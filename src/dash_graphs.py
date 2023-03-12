@@ -440,7 +440,7 @@ app.layout = dbc.Container(
 def init_weekly_avg_plots(league_id, league_year):
     if league_id is None or league_year is None:
         return
-    my_league = LeagueStats(league_id='878418191', league_year=2023)
+    my_league = LeagueStats(league_id, league_year)
     stats = my_league.rate_teams()
     total_cat_wins_df, weekly_performance_df = my_league.compute_categories_won()  # noqa: E501
     stats.set_index('TEAM_NAME')
@@ -465,7 +465,7 @@ def init_weekly_avg_plots(league_id, league_year):
 def init_weeks_won_plots(league_id, league_year):
     if league_id is None or league_year is None:
         return
-    my_league = LeagueStats(league_id='878418191', league_year=2023)
+    my_league = LeagueStats(league_id, league_year)
     total_cat_wins_df, weekly_performance_df = my_league.compute_categories_won()  # noqa: E501
 
     fig_dict = {CAT: px.bar(total_cat_wins_df, x="TEAM", y=CAT, color="TEAM") for CAT in NINE_CAT_CATEGORIES}  # noqa: E501
@@ -488,7 +488,7 @@ def init_weeks_won_plots(league_id, league_year):
 def init_season_performance_plots(league_id, league_year):
     if league_id is None or league_year is None:
         return
-    my_league = LeagueStats(league_id='878418191', league_year=2023)
+    my_league = LeagueStats(league_id, league_year)
     total_cat_wins_df, weekly_performance_df = my_league.compute_categories_won()  # noqa: E501
 
     performance_per_week_dict = {}
