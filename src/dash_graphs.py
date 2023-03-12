@@ -75,7 +75,11 @@ app.layout = dbc.Container(
                         [
                             dbc.Col(
                                 [
-                                    dcc.Graph(id="avg_pts")
+                                    dcc.Loading(
+                                        id="loading-avg-pts",
+                                        children=[dcc.Graph(id="avg_pts")],
+                                        type="graph",
+                                    )
                                 ]
                             )
                         ]
@@ -86,7 +90,11 @@ app.layout = dbc.Container(
                         [
                             dbc.Col(
                                 [
-                                    dcc.Graph(id="graph_pts")
+                                    dcc.Loading(
+                                        id="loading-graph-pts",
+                                        children=[dcc.Graph(id="graph_pts")],
+                                        type="graph",
+                                    )
                                 ]
                             )
                         ]
@@ -97,7 +105,11 @@ app.layout = dbc.Container(
                         [
                             dbc.Col(
                                 [
-                                    dcc.Graph(id="graph_pts_weekly")
+                                    dcc.Loading(
+                                        id="loading-graph-pts-weekly",
+                                        children=[dcc.Graph(id="graph_pts_weekly")],
+                                        type="graph",
+                                    )
                                 ]
                             )
                         ]
@@ -114,7 +126,11 @@ app.layout = dbc.Container(
                         [
                             dbc.Col(
                                 [
-                                    dcc.Graph(id="avg_REB")
+                                    dcc.Loading(
+                                        id="loading-avg-REB",
+                                        children=[dcc.Graph(id="avg_REB")],
+                                        type="graph",
+                                    )
                                 ]
                             )
                         ]
@@ -125,7 +141,11 @@ app.layout = dbc.Container(
                         [
                             dbc.Col(
                                 [
-                                    dcc.Graph(id="graph_REB")
+                                    dcc.Loading(
+                                        id="loading-graph-REB",
+                                        children=[dcc.Graph(id="graph_REB")],
+                                        type="graph",
+                                    )
                                 ]
                             )
                         ]
@@ -136,7 +156,11 @@ app.layout = dbc.Container(
                         [
                             dbc.Col(
                                 [
-                                    dcc.Graph(id="graph_REB_weekly")
+                                    dcc.Loading(
+                                        id="loading-graph-REB-weekly",
+                                        children=[dcc.Graph(id="graph_REB_weekly")],
+                                        type="graph",
+                                    )
                                 ]
                             )
                         ]
@@ -153,7 +177,11 @@ app.layout = dbc.Container(
                         [
                             dbc.Col(
                                 [
-                                    dcc.Graph(id="avg_AST")
+                                    dcc.Loading(
+                                        id="loading-avg-AST",
+                                        children=[dcc.Graph(id="avg_AST")],
+                                        type="graph",
+                                    )
                                 ]
                             )
                         ]
@@ -164,7 +192,11 @@ app.layout = dbc.Container(
                         [
                             dbc.Col(
                                 [
-                                    dcc.Graph(id="graph_AST")
+                                    dcc.Loading(
+                                        id="loading-graph-AST",
+                                        children=[dcc.Graph(id="graph_AST")],
+                                        type="graph",
+                                    )
                                 ]
                             )
                         ]
@@ -175,7 +207,11 @@ app.layout = dbc.Container(
                         [
                             dbc.Col(
                                 [
-                                    dcc.Graph(id="graph_AST_weekly")
+                                    dcc.Loading(
+                                        id="loading-graph-AST-weekly",
+                                        children=[dcc.Graph(id="graph_AST_weekly")],
+                                        type="graph",
+                                    )
                                 ]
                             )
                         ]
@@ -192,7 +228,11 @@ app.layout = dbc.Container(
                         [
                             dbc.Col(
                                 [
-                                    dcc.Graph(id="avg_STL")
+                                    dcc.Loading(
+                                        id="loading-avg-STL",
+                                        children=[dcc.Graph(id="avg_STL")],
+                                        type="graph",
+                                    )
                                 ]
                             )
                         ]
@@ -203,7 +243,11 @@ app.layout = dbc.Container(
                         [
                             dbc.Col(
                                 [
-                                    dcc.Graph(id="graph_STL")
+                                    dcc.Loading(
+                                        id="loading-graph-STL",
+                                        children=[dcc.Graph(id="graph_STL")],
+                                        type="graph",
+                                    )
                                 ]
                             )
                         ]
@@ -214,7 +258,11 @@ app.layout = dbc.Container(
                         [
                             dbc.Col(
                                 [
-                                    dcc.Graph(id="graph_STL_weekly")
+                                    dcc.Loading(
+                                        id="loading-graph-STL-weekly",
+                                        children=[dcc.Graph(id="graph_STL_weekly")],
+                                        type="graph",
+                                    )
                                 ]
                             )
                         ]
@@ -231,7 +279,11 @@ app.layout = dbc.Container(
                         [
                             dbc.Col(
                                 [
-                                    dcc.Graph(id="avg_BLK")
+                                    dcc.Loading(
+                                        id="loading-avg-BLK",
+                                        children=[dcc.Graph(id="avg_BLK")],
+                                        type="graph",
+                                    )
                                 ]
                             )
                         ]
@@ -242,7 +294,11 @@ app.layout = dbc.Container(
                         [
                             dbc.Col(
                                 [
-                                    dcc.Graph(id="graph_BLK")
+                                    dcc.Loading(
+                                        id="loading-graph-BLK",
+                                        children=[dcc.Graph(id="graph_BLK")],
+                                        type="graph",
+                                    )
                                 ]
                             )
                         ]
@@ -253,7 +309,11 @@ app.layout = dbc.Container(
                         [
                             dbc.Col(
                                 [
-                                    dcc.Graph(id="graph_BLK_weekly")
+                                    dcc.Loading(
+                                        id="loading-graph-BLK-weekly",
+                                        children=[dcc.Graph(id="graph_BLK_weekly")],
+                                        type="graph",
+                                    )
                                 ]
                             )
                         ]
@@ -270,7 +330,11 @@ app.layout = dbc.Container(
                         [
                             dbc.Col(
                                 [
-                                    dcc.Graph(id="avg_TO")
+                                    dcc.Loading(
+                                        id="loading-avg-TO",
+                                        children=[dcc.Graph(id="avg_TO")],
+                                        type="graph",
+                                    )
                                 ]
                             )
                         ]
@@ -281,7 +345,11 @@ app.layout = dbc.Container(
                         [
                             dbc.Col(
                                 [
-                                    dcc.Graph(id="graph_TO")
+                                    dcc.Loading(
+                                        id="loading-graph-TO",
+                                        children=[dcc.Graph(id="graph_TO")],
+                                        type="graph",
+                                    )
                                 ]
                             )
                         ]
@@ -292,7 +360,11 @@ app.layout = dbc.Container(
                         [
                             dbc.Col(
                                 [
-                                    dcc.Graph(id="graph_TO_weekly")
+                                    dcc.Loading(
+                                        id="loading-graph-TO-weekly",
+                                        children=[dcc.Graph(id="graph_TO_weekly")],
+                                        type="graph",
+                                    )
                                 ]
                             )
                         ]
@@ -309,7 +381,11 @@ app.layout = dbc.Container(
                         [
                             dbc.Col(
                                 [
-                                    dcc.Graph(id="avg_FG")
+                                    dcc.Loading(
+                                        id="loading-avg-FG",
+                                        children=[dcc.Graph(id="avg_FG")],
+                                        type="graph",
+                                    )
                                 ]
                             )
                         ]
@@ -320,7 +396,11 @@ app.layout = dbc.Container(
                         [
                             dbc.Col(
                                 [
-                                    dcc.Graph(id="graph_FG")
+                                    dcc.Loading(
+                                        id="loading-graph-FG",
+                                        children=[dcc.Graph(id="graph_FG")],
+                                        type="graph",
+                                    )
                                 ]
                             )
                         ]
@@ -331,7 +411,11 @@ app.layout = dbc.Container(
                         [
                             dbc.Col(
                                 [
-                                    dcc.Graph(id="graph_FG_weekly")
+                                    dcc.Loading(
+                                        id="loading-graph-FG-weekly",
+                                        children=[dcc.Graph(id="graph_FG_weekly")],
+                                        type="graph",
+                                    )
                                 ]
                             )
                         ]
@@ -348,7 +432,11 @@ app.layout = dbc.Container(
                         [
                             dbc.Col(
                                 [
-                                    dcc.Graph(id="avg_FT")
+                                    dcc.Loading(
+                                        id="loading-avg-FT",
+                                        children=[dcc.Graph(id="avg_FT")],
+                                        type="graph",
+                                    )
                                 ]
                             )
                         ]
@@ -359,7 +447,11 @@ app.layout = dbc.Container(
                         [
                             dbc.Col(
                                 [
-                                    dcc.Graph(id="graph_FT")
+                                    dcc.Loading(
+                                        id="loading-graph-FT",
+                                        children=[dcc.Graph(id="graph_FT")],
+                                        type="graph",
+                                    )
                                 ]
                             )
                         ]
@@ -370,7 +462,11 @@ app.layout = dbc.Container(
                         [
                             dbc.Col(
                                 [
-                                    dcc.Graph(id="graph_FT_weekly")
+                                    dcc.Loading(
+                                        id="loading-graph-FT-weekly",
+                                        children=[dcc.Graph(id="graph_FT_weekly")],
+                                        type="graph",
+                                    )
                                 ]
                             )
                         ]
@@ -387,7 +483,11 @@ app.layout = dbc.Container(
                         [
                             dbc.Col(
                                 [
-                                    dcc.Graph(id="avg_3PTM")
+                                    dcc.Loading(
+                                        id="loading-avg-3PTM",
+                                        children=[dcc.Graph(id="avg_3PTM")],
+                                        type="graph",
+                                    )
                                 ]
                             )
                         ]
@@ -398,7 +498,11 @@ app.layout = dbc.Container(
                         [
                             dbc.Col(
                                 [
-                                    dcc.Graph(id="graph_3PTM")
+                                    dcc.Loading(
+                                        id="loading-graph-3PTM",
+                                        children=[dcc.Graph(id="graph_3PTM")],
+                                        type="graph",
+                                    )
                                 ]
                             )
                         ]
@@ -409,7 +513,11 @@ app.layout = dbc.Container(
                         [
                             dbc.Col(
                                 [
-                                    dcc.Graph(id="graph_3PTM_weekly")
+                                    dcc.Loading(
+                                        id="loading-graph-3PTM-weekly",
+                                        children=[dcc.Graph(id="graph_3PTM_weekly")],
+                                        type="graph",
+                                    )
                                 ]
                             )
                         ]
