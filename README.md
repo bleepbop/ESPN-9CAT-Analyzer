@@ -18,7 +18,7 @@ From the main directory (`9CAT_RANKINGS`):
 
 1. `pip install -r requirements.txt`
 
-2. `python3 src/dash_graphs.py`
+2. `python3 src/main.py`
 
 and navigate to `http://localhost:8000` in the browser.
 
