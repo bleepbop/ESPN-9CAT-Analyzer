@@ -20,7 +20,7 @@ class LeagueStats:
     Represents player/team stats for a given ESPN fantasy league during the
     specified season.
     '''
-    def __init__(self, league_id=None, league_year=2023):
+    def __init__(self, league_id=None, league_year=None):
         self.league_id = league_id
         self.league_year = league_year
         self.season = str(league_year - 1) + '-' + str(league_year)[-2:]
@@ -108,7 +108,7 @@ class LeagueStats:
             category_coverage_players[player['PLAYER_NAME']] = elite_category_names  # noqa: E501
         return category_coverage_players
 
-    def init_fantasy_league(self, league_id=None, league_year=2023):
+    def init_fantasy_league(self, league_id=None, league_year=None):
         '''
         Initializes fantasy league with new League object. Stores pulled data
         to json file for future use.
@@ -204,7 +204,6 @@ class LeagueStats:
             team_name = categories_won_by_week[id]["team_name"]
             new_dict = {team_name: categories_won_by_week[id]["cats"]}
             cleaned_output.update(new_dict)
-            # team_name = categories_won_by_week[id]["team_name"]
             inner = {category: 0 for category in NINE_CAT_CATEGORIES}
             for week in new_dict[team_name]:
                 for category in new_dict[team_name][week]:
