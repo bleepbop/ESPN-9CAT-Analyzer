@@ -26,6 +26,10 @@ class LeagueStats:
         self.season = str(league_year - 1) + '-' + str(league_year)[-2:]
         self.league = self.init_fantasy_league(self.league_id,
                                                self.league_year)
+        self.teams = self.league.teams
+    
+    def get_teams(self):
+        return self.teams
 
     def truncate(self, number, digits) -> float:
         '''
