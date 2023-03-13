@@ -1,4 +1,6 @@
 import dash
+import copy
+
 from dash import dcc, html
 from dash.dependencies import Input, Output
 
@@ -75,7 +77,40 @@ app.layout = dbc.Container(
             ],
             className='bg-primary mx-1'
         ),
-        dcc.Tabs(id='tabs', value='Tab1', children=[
+        dcc.Tabs(id='tabs', value='H2HTab', children=[
+            dcc.Tab(
+                label='Head to Head Comparison',
+                id='h2h_tab',
+                value='H2HTab',
+                children=[
+                    html.H2('Compare Teams Head to Head'),
+                    html.Hr(),
+                    dbc.Row(
+                        [
+                            dbc.Col(
+                                [
+                                    dbc.DropdownMenu(
+                                        label="Team 1",
+                                        id="team_1_selection",
+                                        children=[]
+                                    ),
+                                    html.Plaintext()
+                                ]
+                            ),
+                            dbc.Col(
+                                [
+                                    dbc.DropdownMenu(
+                                        label="Team 2",
+                                        id="team_2_selection",
+                                        children=[]
+                                    ),
+                                    html.Plaintext()
+                                ]
+                            )
+                        ]
+                    )
+                ]
+            ),
             dcc.Tab(
                 label='Points Plots',
                 id='pts_tab',
@@ -134,6 +169,38 @@ app.layout = dbc.Container(
     ],
     fluid=True
 )
+
+
+@app.callback(
+    Output(component_id='team_1_selection', component_property='children'),
+    Output(component_id='team_2_selection', component_property='children'),
+    Input(component_id='input_league_id', component_property='value'),
+    Input(component_id='input_league_year', component_property='value'),
+)
+def init_team_dropdowns(league_id, league_year):
+    if league_id is None or league_year is None:
+        return
+    my_league = LeagueStats(league_id, league_year)
+    team_list = []
+    for team in my_league.get_teams():
+        team_list.append(
+            dbc.DropdownMenuItem(team.team_name)
+        )
+    return team_list, copy.deepcopy(team_list)
+
+
+@app.callback(
+    Input(component_id='team_1_selection', component_property='value')
+)
+def analyze_team_1(self, team_name):
+    pass
+
+
+@app.callback(
+    Input(component_id='team_2_selection', component_property='value')
+)
+def analyze_team_2(self, team_name):
+    pass
 
 
 @app.callback(
@@ -218,4 +285,4 @@ def init_season_performance_plots(league_id, league_year):
     return performance_per_week_dict['PTS'], performance_per_week_dict['REB'], performance_per_week_dict['AST'], performance_per_week_dict['STL'], performance_per_week_dict['BLK'], performance_per_week_dict['TO'], performance_per_week_dict['FG%'], performance_per_week_dict['FT%'], performance_per_week_dict['3PTM']  # noqa: E501
 
 
-app.run_server(host='0.0.0.0', port=8000, debug=True)
+app.run_server(host='0.0.0.0', port=8000)
