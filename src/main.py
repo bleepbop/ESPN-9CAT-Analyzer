@@ -30,7 +30,7 @@ app.layout = dbc.Container(
     children=[
         html.H1(
             children='NBA Fantasy Basketball 9CAT League Analyzer',
-            style={'textAlign': 'center', 'background-color': 'primary'}
+            style={'textAlign': 'center', 'backgroundColor': 'primary'}
         ),
         dbc.NavbarSimple(
             brand='Created by bleebop',
@@ -89,21 +89,21 @@ app.layout = dbc.Container(
                         [
                             dbc.Col(
                                 [
-                                    dbc.DropdownMenu(
-                                        label="Team 1",
-                                        id="team_1_selection",
-                                        children=[]
+                                    dcc.Dropdown(
+                                        placeholder="Team 1",
+                                        id="team_1_selection"
                                     ),
+                                    html.Div(id="team_1_name"),
                                     html.Plaintext()
                                 ]
                             ),
                             dbc.Col(
                                 [
-                                    dbc.DropdownMenu(
-                                        label="Team 2",
-                                        id="team_2_selection",
-                                        children=[]
+                                    dcc.Dropdown(
+                                        placeholder="Team 2",
+                                        id="team_2_selection"
                                     ),
+                                    html.Div(id="team_2_name"),
                                     html.Plaintext()
                                 ]
                             )
@@ -172,8 +172,8 @@ app.layout = dbc.Container(
 
 
 @app.callback(
-    Output(component_id='team_1_selection', component_property='children'),
-    Output(component_id='team_2_selection', component_property='children'),
+    Output(component_id='team_1_selection', component_property='options'),
+    Output(component_id='team_2_selection', component_property='options'),
     Input(component_id='input_league_id', component_property='value'),
     Input(component_id='input_league_year', component_property='value'),
 )
@@ -181,26 +181,24 @@ def init_team_dropdowns(league_id, league_year):
     if league_id is None or league_year is None:
         return
     my_league = LeagueStats(league_id, league_year)
-    team_list = []
-    for team in my_league.get_teams():
-        team_list.append(
-            dbc.DropdownMenuItem(team.team_name)
-        )
+    team_list = [team.team_name for team in my_league.get_teams()]
     return team_list, copy.deepcopy(team_list)
 
 
 @app.callback(
+    Output(component_id='team_1_name', component_property='children'),
     Input(component_id='team_1_selection', component_property='value')
 )
-def analyze_team_1(self, team_name):
-    pass
+def analyze_team_1(team_name):
+    return [html.H3(team_name)]
 
 
 @app.callback(
+    Output(component_id='team_2_name', component_property='children'),
     Input(component_id='team_2_selection', component_property='value')
 )
-def analyze_team_2(self, team_name):
-    pass
+def analyze_team_2(team_name):
+    return [html.H3(team_name)]
 
 
 @app.callback(
@@ -285,4 +283,4 @@ def init_season_performance_plots(league_id, league_year):
     return performance_per_week_dict['PTS'], performance_per_week_dict['REB'], performance_per_week_dict['AST'], performance_per_week_dict['STL'], performance_per_week_dict['BLK'], performance_per_week_dict['TO'], performance_per_week_dict['FG%'], performance_per_week_dict['FT%'], performance_per_week_dict['3PTM']  # noqa: E501
 
 
-app.run_server(host='0.0.0.0', port=8000)
+app.run_server(host='0.0.0.0', port=8000, debug=True)
