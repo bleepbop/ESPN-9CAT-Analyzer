@@ -112,8 +112,23 @@ app.layout = dbc.Container(
                             dbc.Col(
                                 [
                                     dcc.Loading(
-                                        id="loading-h2h-comparison",
+                                        id="loading-h2h-bar",
                                         children=[dcc.Graph(id="h2h-comparison-graph")],  # noqa: E501
+                                        type="graph"
+                                    )
+                                ]
+                            )
+                        ]
+                    ),
+                    dbc.Row(
+                        [
+                            dbc.Col(
+                                [
+                                    dcc.Loading(
+                                        id="loading-h2h-radar",
+                                        children=[
+                                            dcc.Graph(id="h2h-radar-graph")
+                                        ],
                                         type="graph"
                                     )
                                 ]
@@ -214,6 +229,7 @@ def analyze_team_2(team_name):
 
 @app.callback(
     Output(component_id='h2h-comparison-graph', component_property='figure'),
+    Output(component_id='h2h-radar-graph', component_property='figure'),
     Input(component_id='team_1_selection', component_property='value'),
     Input(component_id='team_2_selection', component_property='value'),
     Input(component_id='input_league_id', component_property='value'),
@@ -255,7 +271,30 @@ def create_h2h_plot(team_1_name, team_2_name, league_id, league_year):
         legend_x=-0.05,
         legend_y=1.1
     )
-    return fig
+
+    radar = go.Figure()
+    radar.add_trace(go.Scatterpolar(
+        r=h2h_teams_df[team_1_name].values,
+        theta=NINE_CAT_CATEGORIES,
+        fill='toself',
+        name=team_1_name
+    ))
+    radar.add_trace(go.Scatterpolar(
+        r=h2h_teams_df[team_2_name].values,
+        theta=NINE_CAT_CATEGORIES,
+        fill='toself',
+        name=team_2_name
+    ))
+
+    radar.update_layout(
+        polar=dict(
+            radialaxis=dict(
+                visible=True,
+            )
+        ),
+        showlegend=False
+    )
+    return fig, radar
 
 
 @app.callback(
