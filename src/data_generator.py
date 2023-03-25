@@ -219,3 +219,17 @@ class LeagueStats:
         with open('total_categories_won.json', 'w') as fp:
             json.dump(best_categories_by_team, fp)
         return pd.DataFrame.from_dict(best_categories_by_team), self.convert_weekly_performance_data(category_values_per_week)  # noqa: E501
+
+    def create_h2h_teams_df(self, team_1_name, team_2_name):
+        stats = self.rate_teams()
+        # Correct Percentage values so that they show up in bargraph
+        stats['FG%'] = stats['FG%'].apply(lambda x: x * 100)
+        stats['FT%'] = stats['FT%'].apply(lambda x: x * 100)
+        team_1_arr = stats.loc[(stats['TEAM_NAME'] == team_1_name)].values
+        team_2_arr = stats.loc[(stats['TEAM_NAME'] == team_2_name)].values
+        h2h_teams_dict = {
+            'Category': NINE_CAT_CATEGORIES,
+            team_1_name: (team_1_arr.tolist())[0][:9],
+            team_2_name: (team_2_arr.tolist())[0][:9]
+        }
+        return pd.DataFrame(h2h_teams_dict)
