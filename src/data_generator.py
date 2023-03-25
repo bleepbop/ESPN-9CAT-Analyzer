@@ -27,7 +27,7 @@ class LeagueStats:
         self.league = self.init_fantasy_league(self.league_id,
                                                self.league_year)
         self.teams = self.league.teams
-    
+
     def get_teams(self):
         return self.teams
 

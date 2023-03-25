@@ -93,8 +93,7 @@ app.layout = dbc.Container(
                                         placeholder="Team 1",
                                         id="team_1_selection"
                                     ),
-                                    html.Div(id="team_1_name"),
-                                    html.Plaintext()
+                                    html.Div(id="team_1_name")
                                 ]
                             ),
                             dbc.Col(
@@ -103,16 +102,23 @@ app.layout = dbc.Container(
                                         placeholder="Team 2",
                                         id="team_2_selection"
                                     ),
-                                    html.Div(id="team_2_name"),
-                                    html.Plaintext()
+                                    html.Div(id="team_2_name")
                                 ]
                             )
                         ]
                     ),
-                    dcc.Loading(
-                        id="loading-h2h-comparison",
-                        children=[dcc.Graph(id="h2h-comparison-graph")],
-                        type="graph",
+                    dbc.Row(
+                        [
+                            dbc.Col(
+                                [
+                                    dcc.Loading(
+                                        id="loading-h2h-comparison",
+                                        children=[dcc.Graph(id="h2h-comparison-graph")],  # noqa: E501
+                                        type="graph"
+                                    )
+                                ]
+                            )
+                        ]
                     )
                 ]
             ),
@@ -220,25 +226,35 @@ def create_h2h_plot(team_1_name, team_2_name, league_id, league_year):
     h2h_teams_df = my_league.create_h2h_teams_df(team_1_name, team_2_name)
 
     fig = go.Figure()
-    fig.add_trace(go.Bar(x=-h2h_teams_df[team_1_name].values,
-                        y=h2h_teams_df['Category'],
-                        orientation='h',
-                        name=team_1_name,
-                        customdata=h2h_teams_df[team_1_name],
-                        hovertemplate = "Category: %{y}<br>Value: %{customdata}<br>Team Name: " + team_1_name + "<extra></extra>"))
-    fig.add_trace(go.Bar(x=h2h_teams_df[team_2_name],
-                        y=h2h_teams_df['Category'],
-                        orientation='h',
-                        name=team_2_name,
-                        hovertemplate="Category: %{y}<br>Value: %{x}<br>Team Name: " + team_2_name + "<extra></extra>"))    
-    fig.update_layout(barmode='relative', 
-                  height=400, 
-                  width=700, 
-                  yaxis_autorange='reversed',
-                  bargap=0.01,
-                  legend_orientation ='h',
-                  legend_x=-0.05, legend_y=1.1
-                 )
+    fig.add_trace(
+        go.Bar(
+            x=-h2h_teams_df[team_1_name].values,
+            y=h2h_teams_df['Category'],
+            orientation='h',
+            name=team_1_name,
+            customdata=h2h_teams_df[team_1_name],
+            hovertemplate="Category: %{y}<br>Value: %{customdata}<br>Team Name: " + team_1_name + "<extra></extra>"  # noqa: E501
+        )
+    )
+    fig.add_trace(
+        go.Bar(
+            x=h2h_teams_df[team_2_name],
+            y=h2h_teams_df['Category'],
+            orientation='h',
+            name=team_2_name,
+            hovertemplate="Category: %{y}<br>Value: %{x}<br>Team Name: " + team_2_name + "<extra></extra>"  # noqa: E501
+        )
+    )    
+    fig.update_layout(
+        barmode='relative',
+        height=400,
+        width=700,
+        yaxis_autorange='reversed',
+        bargap=0.01,
+        legend_orientation='h',
+        legend_x=-0.05,
+        legend_y=1.1
+    )
     return fig
 
 
@@ -260,7 +276,6 @@ def init_weekly_avg_plots(league_id, league_year):
         return
     my_league = LeagueStats(league_id, league_year)
     stats = my_league.rate_teams()
-    total_cat_wins_df, weekly_performance_df = my_league.compute_categories_won()  # noqa: E501
     stats.set_index('TEAM_NAME')
     weekly_avgs_dict = {CAT: px.bar(stats, x="TEAM_NAME", y=CAT, color="TEAM_NAME") for CAT in NINE_CAT_CATEGORIES}  # noqa: E501
     return weekly_avgs_dict['PTS'], weekly_avgs_dict['REB'], weekly_avgs_dict['AST'], weekly_avgs_dict['STL'], weekly_avgs_dict['BLK'], weekly_avgs_dict['TO'], weekly_avgs_dict['FG%'], weekly_avgs_dict['FT%'], weekly_avgs_dict['3PTM']  # noqa: E501
